@@ -5,7 +5,7 @@ If you want to try it out you will have to run it in combination with the backen
 
 The project uses React.js,Sass and React router and various other react libraries.
 
-There is currently no deployed version but if you wish to get a demo email me at ## patrik.lussi@gmail.com
+There is currently no deployed version but if you wish to get a demo email me at  patrik.lussi@gmail.com
 
 ## Available Scripts
 
