@@ -1,0 +1,697 @@
+@import "./mixins";
+@import "./fonts";
+@import "./variables";
+@import "animate.css";
+:root {
+  --animate-duration: 500ms;
+  --animate-delay: 0.9s;
+}
+h1 {
+  margin: 0;
+}
+input {
+  box-sizing: border-box;
+}
+input[type="text"] {
+  font-size: 14px;
+}
+input[type="password"] {
+  font-size: 14px;
+}
+input[type="submit"] {
+  border-radius: 25px;
+}
+
+.wrapper {
+  background: whitesmoke;
+  width: 100%;
+}
+.wrapper-challenge {
+  height: 100vh;
+}
+.grid-container {
+  background: whitesmoke;
+  max-width: 1000px;
+  display: grid;
+  height: 100vh;
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: minmax(min-content, max-content);
+}
+.tracker {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  background-color: white;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+
+}
+.progressCircleContainer {
+  width: 80%;
+}
+.delete {
+  @include redButton();
+}
+.edit {
+  @include redButton();
+  background-color: rgb(250, 250, 52);
+}
+.profileButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.profileButton {
+  height: 40px;
+  background-color: #e32d2d;
+  border: none;
+  width: 125px;
+  margin: 0 15px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: bolder;
+
+  cursor: pointer;
+  transition: 0.5s ease all;
+  &:hover {
+    transform: scale(1.05);
+  }
+  font-size: 12px;
+  padding: 5px;
+}
+.profileBoxContainer {
+  height: 90%;
+  width: 100%;
+}
+// .editProfile {
+//   font-size: 12px;
+//   padding:5px;
+//   height: 40px;
+//   width: 125px;
+//   border: none;
+//   border-radius: 20px;
+//   text-transform: uppercase;
+//   font-weight: bolder;
+//   margin:0 15px;
+//   cursor: pointer;
+//   transition: 0.5s ease all;
+//   &:hover {
+//     background-color: black;
+//     color:white;
+//   }
+//   background-color: rgb(250, 250, 52);
+// }
+
+.tab {
+  display: flex;
+  flex-basis: 50%;
+  background-color: #979694;
+  border-bottom: 1px solid rgb(189, 189, 189);
+  grid-column: 1/1;
+  .tab-button {
+    cursor: pointer;
+    height: 40px;
+    flex-grow: 1;
+
+    h4 {
+      margin: 10px;
+    }
+  }
+}
+.tracker-content {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    overflow-wrap: break-word;
+  }
+}
+.addChallenge {
+  width: 300px;
+  height: 45px;
+  border: none;
+  border-radius: 25px;
+  background: #0e0d0d;
+  box-shadow: 0px 5px 5px rgb(179, 180, 180);
+  color:white;
+  cursor: pointer;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  transition: 0.5s all ease;
+  &:hover {
+   transform: scale(1.05);
+  }
+  margin-top: 25px;
+}
+.updateForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  width: 100%;
+}
+// Login
+//
+.formBox {
+  width: 200px;
+  height: 500px;
+}
+.white-background-container {
+  grid-column: 1/1;
+  padding: 25px;
+  margin-bottom: 25px;
+  background-color: white;
+  @include centeringWithFlex();
+  height: 100vh;
+}
+.formLogin {
+  @include centeringWithFlex();
+  padding: 15px;
+  row-gap: 30px;
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  .formLine {
+    width: 100%;
+    border: 1px solid black;
+  }
+}
+.styledLabel {
+  margin-bottom: 5px;
+  display: inline-block;
+  margin-right: auto;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.loginInput {
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid black;
+  height: 40px;
+  border-radius: 5px;
+  padding: 10px;
+}
+.loginInput:focus {
+  outline: black;
+}
+.inputBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+//Register
+//
+.formCreateAccount {
+  width: 85%;
+  @include centeringWithFlex();
+  row-gap: 30px;
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  .formLine {
+    width: 100%;
+    border: 1px solid black;
+  }
+}
+.createAccountH1 {
+  font-size: 1.5rem;
+}
+.ContainerForCheckBoxAndLink {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 55px;
+  justify-content: space-between;
+  .checkBoxLabel {
+    font-size: 14px;
+  }
+}
+.registerButton {
+  border: none;
+  width: 65%;
+  height: 35px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  background: rgb(0, 0, 0);
+  color: rgb(253, 245, 245);
+}
+
+//Dashboard
+//
+.dashboard-main-section {
+  padding: 15px;
+  h1 {
+    margin: 25px;
+  }
+}
+.dashboard-inspect-challenge-button {
+  @include redButton();
+}
+
+.nameBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+.nameBoxContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.submitInput {
+  border: none;
+  width: 85%;
+  height: 45px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  background: rgb(0, 0, 0);
+  color: white;
+  transition: all 1s linear;
+  &:hover {
+   transform: scale(1.01);
+  }
+}
+
+.addChallengeButton {
+  width: 80%;
+  border: none;
+  background-color: black;
+  color: white;
+  height: 40px;
+  padding: 10px;
+  border-radius: 25px;
+  margin-top: 50px;
+  transition: all 1s ease;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}
+
+.titleImgContainer {
+  margin-top: 50px;
+  h1 {
+    float: right;
+  }
+
+  img {
+    float: left;
+  }
+}
+
+.challengeCard {
+  width: 90%;
+
+  box-shadow: 0px 5px 5px lightgray;
+  background: white;
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  .circleContainer {
+    width: 60%;
+    padding: 15px;
+    margin-top: 10px;
+  }
+}
+.content-container {
+  @include centeringWithFlex();
+  justify-content: center;
+  padding: 15px;
+  margin-top: 25px;
+}
+.colorDiv {
+  height: 45px;
+  width: 100%;
+  background-color: rgb(114, 217, 252);
+  border-radius: 5px 5px 0px 0px;
+  font-weight: bolder;
+  @include centeringWithFlex();
+  justify-content: center;
+  p {
+    margin: 0;
+  }
+}
+.CTHeader {
+  grid-column: 1;
+  background-color: #b0b0b0;
+  height: 50px;
+
+  ul {
+    list-style: none;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h1 {
+    font-size: 1.5rem;
+    margin-left: 15px;
+  }
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+.slideInMenu {
+  p {
+    
+    margin:0;
+    margin-left: auto;
+    margin-top: 50px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  width: 300px;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  position: absolute;
+
+  // animation-name: fadeIn;
+  // animation: fadeIn 0.3s linear;
+}
+.nav-list-slideIn {
+
+ padding:0;
+ list-style: none;
+ li {
+  margin:25px;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+ }
+}
+
+.dashboard-article {
+  height: 50px;
+  background-color: #fff1bd;
+  grid-column: 1/1;
+}
+.burgerBox {
+  height: 25px;
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 10px;
+  cursor: pointer;
+  .burger-line {
+    width: 100%;
+    height: 5px;
+    background-color: black;
+    display: block;
+    border-radius: 5px;
+  }
+}
+
+.profileCard {
+  background-color: white;
+  width: 80%;
+  margin: 0 auto;
+  height: 500px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 50px;
+  border-radius: 5px;
+  box-shadow: 0px 5px 5px rgb(179, 180, 180);
+}
+.profileBox {
+  height: fit-content;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  margin-top: 25px;
+  p {
+    margin: 0;
+  }
+  span {
+    margin-right: auto;
+    color: black;
+  }
+}
+
+
+
+
+.infoArticle {
+  background-color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  img {
+    width: 100%;
+  }
+}
+
+
+.text-container {
+  box-sizing: border-box;
+  padding: 15px;
+}
+footer {
+  height: 25px;
+  background-color: #f3c892;
+  color: black;
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonBox {
+  display: block;
+}
+.infoArticle {
+  margin-bottom: 25px;
+}
+.left {
+  padding: 15px;
+}
+.login-picture-box {
+  display: none;
+}
+.buttonCardContainer {
+  width: 100%;
+}
+.buttonContainerButton {
+  @include redButtonFitContent();
+  margin-top: 15px;
+}
+.challengeCardContainer {
+  display: block;
+}
+@media screen and (min-width: 640px) {
+  .profileCard {
+    grid-column: 2/4;
+  }
+  .addChallenge {
+   margin-bottom: 50px;
+  }
+  .slideInMenu {
+    display: none;
+  }
+  .grid-container {
+    max-width: 100vw;
+    grid-template-columns: repeat(4, 1fr);
+    height: auto;
+  }
+  .white-background-container {
+    grid-column: 2/4;
+    margin-top: 75px;
+    height: auto;
+    margin-bottom: 25px;
+    box-shadow: 0px 5px 5px rgb(179, 180, 180);
+  }
+  .titleImgContainer {
+    margin: 0;
+  }
+  .tracker {
+    grid-column: 2/4;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 5px 5px rgb(179, 180, 180);
+    margin-top: 25px;
+  }
+  .tab {
+    grid-column: 1/5;
+  }
+  .nameBox {
+    display: flex;
+  }
+  .CTHeader {
+    height: 60px;
+    grid-column: 1/7;
+  }
+  .dashboard-main-section {
+    grid-column: 2/4;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  .slideInMenu {
+    display: none;
+  }
+  .profileCard {
+    grid-column: 3/5;
+  }
+  .grid-container {
+    max-width: 100vw;
+    height: 100vh;
+    height: auto;
+    grid-template-columns: repeat(6, 1fr);
+  
+  }
+  .tracker {
+    grid-column: 3/5;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 5px 5px rgb(179, 180, 180);
+    margin-top: 25px;
+  }
+  .tab {
+    grid-column: 1/7;
+  }
+  .white-background-container {
+    grid-column: 3/5;
+    margin-top: 75px;
+    height: auto;
+    margin-bottom: 25px;
+    box-shadow: 0px 5px 5px rgb(179, 180, 180);
+  }
+  .titleImgContainer {
+    margin: 0;
+  }
+  .nameBox {
+    display: flex;
+  }
+  .CTHeader {
+    height: 65px;
+  }
+  .dashboard-main-section {
+    grid-column: 3/5;
+  }
+}
+
+@media only screen and (min-width: 1224px) {
+  .profileCard {
+    grid-column: 4/6;
+  }
+  .addChallenge {
+    margin-top: 200px;
+  }
+  .slideInMenu {
+    display: none;
+  }
+  .grid-container {
+    max-width: 100vw;
+    width: 100%;
+    height: 100vh;
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .addChallengeButton {
+    width: 120px;
+    height: 212.5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+
+    padding: 0;
+    background-color: whitesmoke;
+  }
+  .titleImgContainer {
+    margin: 0;
+  }
+  .tab {
+    grid-column: 1/9;
+  }
+  .tracker {
+    grid-column: 4/6;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 5px 5px rgb(179, 180, 180);
+    margin-top: 100px;
+  }
+
+  .CTHeader {
+    grid-column: 1/9;
+  }
+  .dashboard-main-section {
+    grid-column: 1/9;
+  }
+  .challengeCardContainer {
+    margin: 0 auto;
+    width: 70%;
+    @include centeringWithFlexRow();
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 20px;
+  }
+
+  .challengeCard {
+    width: 250px;
+    margin: 0;
+  }
+  .CTHeader {
+    height: 75px;
+  }
+  
+  .nameBox {
+    display: flex;
+  }
+
+  
+  footer {
+    grid-column: 1/9;
+  }
+  .infoArticle {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    img {
+      width: 365px;
+      align-self: flex-end;
+    }
+  }
+  .buttonBox {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    p {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  .infoArticle {
+    margin-bottom: 25px;
+  }
+  .white-background-container {
+    grid-column: 4/6;
+
+    height: auto;
+    margin-bottom: 25px;
+    box-shadow: 0px 5px 5px rgb(179, 180, 180);
+  }
+}
