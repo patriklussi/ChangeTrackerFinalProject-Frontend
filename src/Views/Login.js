@@ -10,7 +10,7 @@ export default function Login() {
     userName: "",
     passWord: "",
   });
-  
+
   const goToRegister = () => {
     navigate("/createaccount");
   };
@@ -21,7 +21,7 @@ export default function Login() {
       [e.target.name]: e.target.value,
     });
   }
-  async function TryLogIn(e) {
+    const TryLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch("https://localhost:7056/api/Users/login", {
@@ -35,14 +35,13 @@ export default function Login() {
       const data = await response.json();
 
       var decoded = jwt_decode(data.token);
-      sessionStorage.setItem("token", JSON.stringify(data.token));
-      sessionStorage.setItem("jwt", JSON.stringify(decoded));
-
+ 
       if (responseCode.status === 200) {
         navigate("/dashboard");
         sessionStorage.setItem("isLoggedIn", true);
+        sessionStorage.setItem("token", JSON.stringify(data.token));
+        sessionStorage.setItem("jwt", JSON.stringify(decoded));
       }
-      console.log(responseCode.message);
     } catch (err) {
       console.log(err);
       setError(err.message);
@@ -63,7 +62,7 @@ export default function Login() {
           ) : (
             <></>
           )}
-          <form className="formLogin" onSubmit={TryLogIn}>
+          <form className="formLogin" onSubmit={TryLogin}>
             <article className="inputBox">
               <label htmlFor="userName" className="styledLabel">
                 Username
