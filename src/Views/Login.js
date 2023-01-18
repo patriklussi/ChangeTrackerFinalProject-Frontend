@@ -10,10 +10,12 @@ export default function Login() {
     userName: "",
     passWord: "",
   });
+  
   const goToRegister = () => {
     navigate("/createaccount");
   };
-  function handleChange(e) {
+ 
+  const handleChange = () => {
     setLoginDataToSend({
       ...loginDataToSend,
       [e.target.name]: e.target.value,
