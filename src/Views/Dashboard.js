@@ -62,7 +62,7 @@ export default function Dashboard() {
   console.log(challenge);
 
   return (
-    <div className="wrapper-challenge">
+    <div className="wrapper">
       <div className="grid-container">
         <Header></Header>
 

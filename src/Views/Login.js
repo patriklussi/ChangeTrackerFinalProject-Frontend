@@ -15,7 +15,7 @@ export default function Login() {
     navigate("/createaccount");
   };
  
-  const handleChange = () => {
+  const handleChange = (e) => {
     setLoginDataToSend({
       ...loginDataToSend,
       [e.target.name]: e.target.value,

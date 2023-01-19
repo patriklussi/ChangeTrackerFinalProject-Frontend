@@ -1,4 +1,4 @@
-
+import "./Styles/Views.scss"
 import './App.css';
 import Root from "./Root"
 

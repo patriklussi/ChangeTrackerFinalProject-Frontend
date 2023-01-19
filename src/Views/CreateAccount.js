@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState}from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "../assets/svg/logo.svg";
 import "../Styles/Views.scss";
@@ -12,6 +12,7 @@ export default function CreateAccount() {
     passWord: "",
     email: "",
   });
+  const [createdAccountMessage,setCreatedAccountMessage] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -20,25 +21,32 @@ export default function CreateAccount() {
     });
   };
 
-  async function submitData(e) {
+  const submitData = async (e) => {
     e.preventDefault();
-    const response = await fetch(
-      "https://localhost:7056/api/Users/createaccount",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(FormData),
+    try {
+      const response = await fetch(
+        "https://localhost:7056/api/Users/createaccount",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(FormData),
+        }
+      );
+        
+      console.log(response);
+      if (response.status === 200) {
+        setCreatedAccountMessage(true);
+        setTimeout(()=>{
+          navigate("/");
+        },2000)
+      
       }
-    );
-    const data = response.json();
-
-    console.log(response);
-    if (response.status === 200) {
-      navigate("/");
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div className="wrapper">
@@ -49,6 +57,7 @@ export default function CreateAccount() {
             <h1> ChangeTracker</h1>
           </article>
           <p>Create your ChangeTracker account!</p>
+          {createdAccountMessage ?  <span style={{color:"green",margin:"0 auto"}} >Account created!</span> : <></>}
           <form className="formCreateAccount" onSubmit={submitData}>
             <div className="inputBox">
               <label className="styledLabel">Username</label>

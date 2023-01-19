@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Components/Header";
 import "../Styles/Views.scss";
+import editIcon from "../assets/svg/editIcon.svg";
 export default function Profile() {
   let temp = JSON.parse(sessionStorage.getItem("jwt"));
   let id = temp.name;
@@ -11,12 +12,12 @@ export default function Profile() {
   const [updatePage, setUpdatePage] = React.useState(true);
   const [updateInfo, setUpdateInfo] = React.useState({
     userId: "",
-    firstName:"",
-    lastName:"",
-    userName:"",
-    email:"",
-    passWord:"",
-  })
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    passWord: "",
+  });
   useEffect(() => {
     if (sessionStorage.length === 0) {
       navigate("/login");
@@ -25,7 +26,7 @@ export default function Profile() {
     }
   }, []);
 
-  async function getUserInfo() {
+  const getUserInfo = async () => {
     let temp = JSON.parse(sessionStorage.getItem("jwt"));
     let id = temp.name;
     const response = await fetch(`https://localhost:7056/api/Users/${id}`);
@@ -35,9 +36,9 @@ export default function Profile() {
     if (response.status === 200) {
       setArrived(true);
     }
-  }
-  async function deleteProfile() {
-   console.log(updateInfo);
+  };
+  const deleteProfile = async () => {
+    console.log(updateInfo);
     let token = JSON.parse(sessionStorage.getItem("token"));
     const response = await fetch(
       `https://localhost:7056/api/Users/delete/${id}`,
@@ -54,128 +55,125 @@ export default function Profile() {
       sessionStorage.clear();
       navigate("/login");
     }
-  }
-  function handleChange(e){
-    
+  };
+  const handleChange = (e) => {
     setUpdateInfo({
       ...updateInfo,
-    [e.target.name] : e.target.value,
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
- async function UpdateUser(e){
-  console.log(updateInfo);
-  e.preventDefault();
-  let temp = JSON.parse(sessionStorage.getItem("jwt"));
+  async function UpdateUser(e) {
+    console.log(updateInfo);
+    e.preventDefault();
+    let temp = JSON.parse(sessionStorage.getItem("jwt"));
     let id = temp.name;
     let token = JSON.parse(sessionStorage.getItem("token"));
-  
-    const response  = await fetch(`https://localhost:7056/api/Users/update/${id}`,{
-      method:"POST",
-      headers: {
-        Authorization : `Bearer ${token}`,
-        "Content-Type": "application/json",
+
+    const response = await fetch(
+      `https://localhost:7056/api/Users/update/${id}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       }
-      
-    });
+    );
     console.log(response.status);
-    
   }
   return (
     <div className="grid-container">
       <Header></Header>
-
       {arrived ? (
         <>
-          {updatePage ? (
-            <article className="profileCard">
-              <h1 style={{ margin: "0" }}>Your profile</h1>
-              <div className="profileBoxContainer">
-                <div className="profileBox">
-                  <span>Name:</span>
-                  <p>
-                    {profileData.firstName} {profileData.lastName}
-                  </p>
-                </div>
-                <div className="profileBox">
-                  <span>Username:</span>
-                  <p>{profileData.userName}</p>
-                </div>
-                <div className="profileBox">
-                  <span>Email:</span>
-                  <p>{profileData.email}</p>
-                </div>
-                <div className="profileBox">
-                  <span>Password:</span>
-                  <p>********</p>
+          <section className="profileCard">
+            <h1 style={{ margin: "0" }}>Your profile</h1>
+            <div className="profileBoxContainer">
+              <div className="profileBox--editInputContainer">
+                <label htmlFor="fullName">Full name</label>
+                <div className="profileBox--editInputContainer">
+                  <input
+                    id="fullName"
+                    name="name"
+                    readOnly
+                    value={profileData.firstName + " " + profileData.lastName}
+                  />
+                  <button className="profileBox--editIconButton">
+                    <img
+                      className="profileBox--icon"
+                      src={editIcon}
+                      alt="Icon showing a pen to symbolize editing"
+                    />{" "}
+                  </button>
                 </div>
               </div>
-              <div className="profileButtonContainer">
-                {" "}
-                <button
-                  style={{ background: "  rgb(250, 250, 52) " }}
-                  className="profileButton"
-                  onClick={() => {
-                    setUpdatePage(!updatePage);
-                  }}
-                >
-                  Edit profile
-                </button>
-                <button
-                  onClick={() => {
-                    deleteProfile();
-                  }}
-                  className="profileButton"
-                >
-                  Delete profile
-                </button>{" "}
-              </div>
-            </article>
-          ) : (
-            <article className="profileCard">
-              <form onSubmit={UpdateUser} className="updateForm">
-                <h1
-                  style={{
-                    margin: "0",
-                    marginRight: "auto",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    setUpdatePage(!updatePage);
-                  }}
-                >
-                  X
-                </h1>
-                <p style={{ margin: "0" }}>Update your account information</p>
-                <div className="inputBox">
-                  <label className="styledLabel">First name</label>
-                  <input onChange={(e)=>{handleChange(e)}} className="loginInput" type="text" name="firstName" />
-                </div>
-                <div className="inputBox">
-                  <label className="styledLabel">Last name</label>
-                  <input  onChange={(e)=>{handleChange(e)}} className="loginInput" type="text" name="lastName" />
-                </div>
-                <div className="inputBox">
-                  <label className="styledLabel">Username</label>
-                  <input  onChange={(e)=>{handleChange(e)}} className="loginInput" type="text" name="userName" />
-                </div>
-                <div className="inputBox">
-                  <label className="styledLabel">Email</label>
-                  <input  onChange={(e)=>{handleChange(e)}} className="loginInput" type="text" name="email" />
-                </div>
-                <div className="inputBox">
-                  <label className="styledLabel">Password</label>
-                  <input  onChange={(e)=>{handleChange(e)}} className="loginInput" type="text" name="passWord" />
-                </div>
+              <div className="profileBox--editInputContainer">
+                <label htmlFor="userName">Username</label>
                 <input
-                  style={{ width: "100%" }}
-                  className="registerButton"
-                  type="submit"
-                  value="Update account"
+                  id="userName"
+                  name="userName"
+                  readOnly
+                  value={profileData.userName}
                 />
-              </form>
-            </article>
-          )}
+                <button className="profileBox--editIconButton">
+                  <img
+                    className="profileBox--icon"
+                    src={editIcon}
+                    alt="Icon showing a pen to symbolize editing"
+                  />{" "}
+                </button>
+              </div>
+              <div className="profileBox--editInputContainer">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  readOnly
+                  value={profileData.email}
+                />
+                <button className="profileBox--editIconButton">
+                  <img
+                    className="profileBox--icon"
+                    src={editIcon}
+                    alt="Icon showing a pen to symbolize editing"
+                  />{" "}
+                </button>
+              </div>
+              <div className="profileBox--editInputContainer">
+                <label htmlFor="password">Password</label>
+                <input id="password" name="passWord" readOnly value="*******" />
+                <button className="profileBox--editIconButton">
+                  <img
+                    className="profileBox--icon"
+                    src={editIcon}
+                    alt="Icon showing a pen to symbolize editing"
+                  />{" "}
+                </button>
+              </div>
+            </div>
+
+            <div className="profileButtonContainer">
+              {" "}
+              <button
+                style={{ background: "  rgb(250, 250, 52) " }}
+                className="profileButton"
+                onClick={() => {
+                  setUpdatePage(!updatePage);
+                }}
+              >
+                Edit profile
+              </button>
+              <button
+                onClick={() => {
+                  deleteProfile();
+                }}
+                className="profileButton"
+              >
+                Delete profile
+              </button>{" "}
+            </div>
+          </section>
         </>
       ) : (
         <h1>Profile not found</h1>

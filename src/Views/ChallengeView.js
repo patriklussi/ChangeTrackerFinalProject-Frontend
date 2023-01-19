@@ -47,14 +47,14 @@ export default function ChallengeView(props) {
           <Header />
           <div className="tab">
             <div
-              className="tab-button"
+              className="tab--button"
               style={{ opacity: `${active ? "1" : "0.5"}` }}
               onClick={switchTab}
             >
               <h4>Tracker</h4>
             </div>
             <div
-              className="tab-button"
+              className="tab--button"
               style={{ opacity: `${active ? "0.5" : "1"}` }}
               onClick={switchTab}
             >
